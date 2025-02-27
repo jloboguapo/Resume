@@ -1,8 +1,9 @@
-import js from '@eslint/js'
-import globals from 'globals'
-import react from 'eslint-plugin-react'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
+import js from '@eslint/js';
+import globals from 'globals';
+import react from 'eslint-plugin-react';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
+import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 
 export default [
   { ignores: ['dist'] },
@@ -12,7 +13,6 @@ export default [
       ecmaVersion: 2020,
       globals: globals.browser,
       parserOptions: {
-        
         ecmaVersion: 'latest',
         ecmaFeatures: { jsx: true },
         sourceType: 'module',
@@ -25,6 +25,14 @@ export default [
       'react-refresh': reactRefresh,
     },
     rules: {
+      'prettier/prettier': [
+        'error',
+        {
+          arrowParens: 'avoid',
+          singleQuote: true,
+          printWidth: 80,
+        },
+      ],
       ...js.configs.recommended.rules,
       ...react.configs.recommended.rules,
       ...react.configs['jsx-runtime'].rules,
@@ -36,4 +44,5 @@ export default [
       ],
     },
   },
-]
+  eslintPluginPrettierRecommended,
+];
